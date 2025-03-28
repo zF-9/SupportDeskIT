@@ -1,134 +1,47 @@
-<?php 
-	/*include '../init.php'; 
-	include '../core/includes/head2.php';
-	
-	if(isset($_GET['id']) && $users->signed_in() && $tickets->is_ticket($_GET['id'])) {
-	    if(!$tickets->my_ticket($_GET['id'])) {
-  	      if(!$users->getuserinfo('user_group') == 1){
-    	        header('Location: ../authenticate');
-    	        die();
-  	      }
-	    }
-	    $tickets->user_read($_GET['id']);
-	    $tickets->admin_read($_GET['id']);*/
-?>
+@extends('layouts.header')
 
+@section('content')		
 
 <div class="container">
 	<div class="row">
-		<a href="../index1.php" class="go-back"><span class="entypo-left-open"></span>Dashboard</a>
-		<br><br>
-		
-		<div class="ticket-insert">
-			<div class="columns three">
-				<div class="profile">				
-					<?php /* 
-	    $cookie_name = "gender";
-	    if(!isset($_COOKIE[$cookie_name])) {?>
-    		<img src="//gravatar.com/avatar/<?php echo md5($users->getuserinfo('email')); ?>?s=100">
-    	
-<?php } else {
-    if($_COOKIE[$cookie_name] == 1)
-    	echo $male[$m];
-    else
-    	echo $female[$f];
-}
-	    	*/?>
-					<ul>
-						<li><b><?php /*echo $users->idtocolumn($tickets->ticket_info($_GET['id'], 'user'), 'nick_name'); */?></b></li>
-						<li><?php if($users->idtocolumn($tickets->ticket_info($_GET['id'], 'user'), 'user_group') == 1) { echo 'Administrator'; } else { echo 'General user'; } ?></li>
-							<?php if($users->idtocolumn($tickets->ticket_info($_GET['id'], 'user'), 'id') == $_COOKIE['user']) { echo '<li><a href="#">Edit Account</a></li>'; } ?>
-					</ul>
-				</div>
-			</div>
-		
-			<div class="columns nine">
-				<h4><?php echo $tickets->ticket_info($_GET['id'], 'title'); ?></h4>
-				<hr>
-				<?php echo nl2br($tickets->ticket_info($_GET['id'], 'init_msg')); ?>
-				<ul>
-					<li><?php if($tickets->ticket_info($_GET['id'], 'resolved') == 0 && $tickets->ticket_info($_GET['id'], 'user') == $_COOKIE['user']) { ?>
-					        <a id="no_longer_help" href="#"><span class="entypo-check"></span>I no longer need help</a>
-					    <?php } else if($tickets->ticket_info($_GET['id'], 'user') == $_COOKIE['user']) { ?>
-					        This ticket has been marked resolved.
-					    <?php } else if($users->getuserinfo('user_group') == 1 && $tickets->ticket_info($_GET['id'], 'resolved') == 0) { ?></li>
-					        <button id="close_ticket" style="margin-right:15px;">Close ticket</button>
-					    <?php } else { ?>
-					        Ticket closed
-					    <?php } ?>
-					<li>Posted <?php echo $time->ago($tickets->ticket_info($_GET['id'], 'date')); ?></li>
-				</ul>
-			</div>
+		<div class="four columns admin-menu">
+		@include('layouts.admin_sidemenu')
 		</div>
-	</div>
-	<!-- ticket post end -->	
-	
-	<hr>
-	<div id="update">
-	<!-- reply start -->
-	<span id="replies">
-	    	<?php $tickets->ticket_replies($_GET['id']); ?>
-	</span>
-	<!-- reply end -->
-	</div>
-	<div class="row">
-		<div class="ticket-insert">
-			<div class="columns three">
-				<div class="profile">				
-					<?php 
-	    $cookie_name = "gender";
-	    if(!isset($_COOKIE[$cookie_name])) {?>
-    		<img src="//gravatar.com/avatar/<?php echo md5($users->getuserinfo('email')); ?>?s=100">
-    	
-<?php } else {
-    if($_COOKIE[$cookie_name] == 1)
-    	echo $male[$m];
-    else
-    	echo $female[$f];
-}
-	    	?>
-					<ul>
-						<li><b><?php echo $users->getuserinfo('nick_name'); ?></b></li>
-						<li><?php if($users->getuserinfo('user_group') == 1) { echo 'Administrator'; } else { echo 'General user'; } ?></li>
-						<li><a href="#">Edit Account</a></li>
-					</ul>
-				</div>
-			</div>
-			<?php 
-			    if($tickets->ticket_info($_GET['id'], 'resolved') == 0) {
-			?>
-		
-			<div class="columns nine">
-				<form id="reply">
-  				<textarea id="rtext" class="u-full-width" placeholder="Enter your reply..."></textarea>
-  				<button type="submit">Add Reply</button>
-  			</form>
-			</div>
-			<?php } else { ?>
-			<div class="columns nine">
-			  <?php if($users->getuserinfo('user_group') == 0) { ?>
-			      <div class="alert warning">This ticket has been closed, please open another support ticket for further support.</div>
-			  <?php } else { ?>
-			       <div class="alert warning">This ticket has been closed.</div>
-			  <?php } ?>
-				<form>
-  				<textarea id="rtext" class="u-full-width" disabled placeholder="Enter your reply..."></textarea>
-  				<button disabled>Add Reply</button>
-  			</form>
-			</div>
-			<?php } ?>
+
+
+		<div class="eight columns settings-forms">		
+		<!-- Here lies scripts -->		
+		<div style=" " class="section_view_current">
+			<table class="u-full-width">
+			<thead>
+				<tr>
+				<th>Subject</th>
+				<th>Status</th>
+				<th>Last Reply</th>
+				<th>Recent</th>
+				</tr>
+			</thead>
+			<tbody>
+			@foreach($ticket as $key => $ticks)
+				<tr>
+					<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
+					<td>
+						<span class="entypo-comment"></span>
+					</td>
+					<td>{{$ticks->name}}</td>
+					<td>{{$ticks->created_at}}</td>
+				</tr>
+				@endforeach
+				<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>  </tbody>
+			</table>
 		</div>
-	</div>
-	
 </div>
 </div>
 
 
+<div style="margin-top:100px;display: block;"><!-- space acting footer --></div>
+@endsection
 
-<?php
-	/*} else {
-	    header('Location: ../authenticate');
-	    die();
-	}
-	include '../core/includes/foot.php'; */
-?>
+@push('scripts')
+       <script src="../js/functions.js"></script>
+@endpush

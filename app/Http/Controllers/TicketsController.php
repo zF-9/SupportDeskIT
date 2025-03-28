@@ -88,6 +88,13 @@ class TicketsController extends Controller
         //
     }
 
+    public function ticket_view($ticket_uuid) {
+        $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
+        dd($ticket_log->user_id);
+
+        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

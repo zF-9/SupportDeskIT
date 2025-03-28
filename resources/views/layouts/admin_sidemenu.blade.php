@@ -16,7 +16,7 @@
 			Admin Dashboard
 			<p>Overview of site statistics</p>
 		</li></a>
-		<a href="ticket_management.php">
+		<a href="/manage_ticket">
 		<li>
 			Tickets Management
 			<p>View, answer and resolve tickets created.</p>

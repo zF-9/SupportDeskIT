@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <title>SupportDeskIT</title>
   <meta name="description" content="Support Ticket System.">
-  <meta name="author" content="Debjyoti Guha">
+  <meta name="author" content="ZF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='//fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
   <link href='//weloveiconfonts.com/api/?family=entypo' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
   <link rel="icon" type="image/png" href="">
-  <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/foot.js"></script>
+  <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../js/index.js"></script>
+  <script type="text/javascript" src="../js/foot.js"></script>
 
 <script>
 /*$(document).ready(function(){

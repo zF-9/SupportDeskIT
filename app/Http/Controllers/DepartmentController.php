@@ -69,6 +69,13 @@ class DepartmentController extends Controller
         //
     }
 
+    public function manage_dept($dept_id){
+        $target_dept = department::where('id', $dept_id)->first();
+        #dd($target_dept);
+
+        return view('edit_department')->with(['t_dept'=>$target_dept]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

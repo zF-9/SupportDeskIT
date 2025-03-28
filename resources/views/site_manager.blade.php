@@ -1,25 +1,7 @@
 @extends('layouts.header')
 
 @section('content')	
-    <!--<div class="container">
-
-        <div class="row">
-            <div class="columns four admin-menu">
-			
-            </div>
-            
-            <div class="columns eight">
-	            <h4>Edit department</h4>
-	            <span id="dptERR"></span>
-	            <form id="dptform">
-		            <input type="text" placeholder="Department Name" id="dept_new" value=" " class="u-full-width">
-		            <button type="submit" name="update">Update Department</button>
-		            <button id="delete_dpt" class="button button-blank" name="delete">Delete</button>
-		        </form>
-		        <div class="alert"><b>Please note:</b> Deleting a department will delete all tickets associated with it.</div>
-			</div>
-        </div>
-	</div>-->
+    <!-- -->
 
 
 	
@@ -46,7 +28,7 @@
 					  <tr>
 						<td>{{ $dept->id }}</td>
 						<td>{{ $dept->name }}</td>
-						<td>{{ $dept->hidden }}</td>
+						<td><a href="/manage_dept/{{$dept->id}}"><span class="entypo-cog"></span></a></td>
 					  </tr>
   					</tbody>
 					@endforeach
