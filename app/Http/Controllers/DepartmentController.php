@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Models\department;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -29,7 +31,8 @@ class DepartmentController extends Controller
 
         $add_section->save();
 
-        return view('site_manager');
+        $active_dept = DB::table('departments')->get();
+        return view('site_manager')->with(['department'=>$active_dept]);
     }
 
     /**
@@ -59,6 +62,7 @@ class DepartmentController extends Controller
     public function edit(department $department)
     {
         //
+        #$dept_name = request();
     }
 
     /**
@@ -74,6 +78,19 @@ class DepartmentController extends Controller
         #dd($target_dept);
 
         return view('edit_department')->with(['t_dept'=>$target_dept]);
+    }
+
+    public function update_dept(Request $request, $dept_id) {
+        $target_dept = department::find($dept_id);
+        $placeholder = request('update_dept');
+        #dd($target_dept);
+
+        $target_dept->name = $placeholder;
+        $target_dept->save();
+
+        $active_dept = DB::table('departments')->get();
+        return view('site_manager')->with(['department'=>$active_dept]);
+
     }
 
     /**

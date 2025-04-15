@@ -102,7 +102,7 @@
 	<tbody>
 	@foreach($ticket as $key => $ticks)
 		<tr>
-			<td><a href="/ticket/{{ $ticks->uniqid }}">{{$ticks->title}}</a></td>
+			<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
 			<td>
 				<span class="entypo-comment"></span>
 			</td>
@@ -110,7 +110,8 @@
 			<td>{{$ticks->created_at}}</td>
 		</tr>
 		@endforeach
-		<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>  </tbody>
+		<!--<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>-->  
+	</tbody>
 	</table>
 </div>
 

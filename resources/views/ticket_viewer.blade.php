@@ -30,9 +30,9 @@
 					<li>Posted {{$ticketlog->created_at}}</li>
                     @if( $ticketlog->resolved  == 0)
                         <li><a id="no_longer_help" href="#"><span class="entypo-check"></span>I no longer need help</a></li>
-                    @elseif({{ $ticketlog->user_id }}== {{ Auth::user()->id }})
+                    @elseif( $ticketlog->user_id  ==  Auth::user()->id )
                         <li>This ticket has been marked resolved.</li>
-                    @elseif({{$ticketlog->user_group}} == 1 A&& {{$ticketlog->resolved}} == 0)
+                    @elseif( $ticketlog->user_group == 1 && $ticketlog->resolved == 1 )
                         <li>Ticket Closed</li>
                     @endif
 				</ul>

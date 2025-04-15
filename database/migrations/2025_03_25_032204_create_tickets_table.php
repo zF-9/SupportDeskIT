@@ -18,10 +18,10 @@ return new class extends Migration
             $table->uuid('uniqid');
             $table->string('title');
             $table->text('init_msg');
-            $table->integer('last_reply')->nullable();
-            $table->integer('user_read')->nullable();
-            $table->integer('admin_read')->nullable();
-            $table->integer('resolved')->nullable();
+            $table->boolean('last_reply')->default(0);
+            $table->boolean('user_read')->default(0);
+            $table->boolean('admin_read')->default(0);
+            $table->boolean('resolved')->default(0);
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->timestamp('deleted_at')->nullable();

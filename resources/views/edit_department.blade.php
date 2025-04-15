@@ -12,8 +12,9 @@
 			<div class="columns eight">
 	            <h4>Edit department</h4>
 	            <span id="dptERR"></span>
-	            <form id="dptform" method="POST" action=" ">
-		            <input type="text" placeholder="Department Name" id="dept_new" value="{{ $t_dept->name }} " class="u-full-width">
+	            <form id="dptform" method="POST" action="/update_dept/{{ $t_dept->id }}">
+				@csrf
+		            <input type="text" placeholder="Department Name" name="update_dept" id="dept_new" value="{{ $t_dept->name }} " class="u-full-width">
 		            <button type="submit" name="update">Update Department</button>
 		            <button id="delete_dpt" class="button button-blank" name="delete">Delete</button>
 		        </form>
