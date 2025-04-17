@@ -8,6 +8,7 @@ class tickets extends Model
 {
     //
     public function tickets() {
+        return $this->hasMany(ticket_replies::class);
     	return $this->belongsTo(user::class);
         return $this->belongsTo(department::class);
     }   

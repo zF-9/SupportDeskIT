@@ -40,8 +40,38 @@
 		</div>
 	</div>
 	<!-- ticket post end -->	
-	
 	<hr>
+
+    @foreach($respond as $key => $reply)
+	<div class="row">
+		<div class="ticket-insert">
+			<div class="columns three">
+				<div class="profile">				
+					<ul>
+						<li><b>{{ $reply->name }}</b></li>
+                        
+                        @if($ticketlog->user_group == 1)
+                            <li>Administrator</li>
+                        @else
+                            <li> General User</li>
+                        @endif
+					</ul>
+				</div>
+			</div>
+		
+			<div class="columns nine">
+				{{$reply->text}} 
+				<ul>
+					<li>Posted {{$reply->created_at}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    <hr>
+    @endforeach
+	<!-- ticket post end -->	
+
+
 	<div id="update">
 	<!-- reply start -->
 	<span id="replies"></span>
@@ -64,8 +94,9 @@
 			</div>
             @if($ticketlog->resolved == 0)
             <div class="columns nine">
-                <form id="reply">
-                    <textarea id="rtext" class="u-full-width" placeholder="Enter your reply..."></textarea>
+                <form id="reply" method="POST" action="/add_replies/{{ $ticket_id }}">
+                @csrf
+                    <textarea id="rtext" name="ticket_reply" class="u-full-width" placeholder="Enter your reply..."></textarea>
                     <button type="submit">Add Reply</button>
                 </form>
             </div>

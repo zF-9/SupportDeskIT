@@ -98,13 +98,25 @@ class TicketsController extends Controller
         return view('ticket_manager')->with(['ticket'=>$tickets_view, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess]);
     }
 
-    public function ticket_view($ticket_uuid) {
+    public function ticket_view(Request $request, $ticket_uuid) {
         $current_viewer = Auth::user()->id; 
         $userAccess = Auth::user()->user_group; #check user access
-        $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
-        #dd($ticket_log);
+        $ticket_log = DB::table('tickets')
+        ->where('uniqid',$ticket_uuid)
+        ->join('users', 'users.id', 'tickets.user_id')
+        ->first();
 
-        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess ]);
+        if($userAccess == 1) {
+            $target_ticket = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->update(['admin_read'=>1]);
+        }
+        else {
+            
+        }
+        $uuid = $ticket_log->uniqid;
+
+        $replies = DB::table('ticket_replies')->where('ticket_id',$uuid)->join('users', 'users.id', 'ticket_replies.user')->get();
+        #dd($replies);
+        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess, 'ticket_id'=>$uuid, 'respond'=>$replies]);
     }
 
     /**

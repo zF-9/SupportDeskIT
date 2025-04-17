@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Carbon\Carbon;
 use App\Models\ticket_replies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TicketRepliesController extends Controller
 {
@@ -18,9 +22,21 @@ class TicketRepliesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($uuid)
     {
         //
+        $dt = new Carbon();
+        $userId = Auth::user()->id;
+
+        $reply_ticket = new ticket_replies;
+        #dd($uuid);
+        $reply_ticket->user = $userId;
+        $reply_ticket->text = request('ticket_reply');
+        $reply_ticket->ticket_id = $uuid;
+        $reply_ticket->created_at = $dt;
+        $reply_ticket->save();
+
+       return redirect()->back(); 
     }
 
     /**

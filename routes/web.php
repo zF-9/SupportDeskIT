@@ -27,6 +27,7 @@ Route::post('/update_dept/{dept_id}', [App\Http\Controllers\DepartmentController
 Route::get('/overview', [App\Http\Controllers\TicketsController::class, 'show'])->name('overview');
 
 Route::get('/{uuid}/view_ticket', [App\Http\Controllers\TicketsController::class, 'ticket_view'])->name('ViewTicket');
+Route::get('/manage_ticket', [App\Http\Controllers\TicketsController::class, 'tickets_manager'])->name('ManageTickets');
 
 Route::get('/user_management', [App\Http\Controllers\AdminSettingsController::class, 'show'])->name('user_management');
 Route::get('/{id}/edit_user', [App\Http\Controllers\AdminSettingsController::class, 'scope_user'])->name('edit_user');
@@ -34,7 +35,7 @@ Route::get('/{id}/edit_user', [App\Http\Controllers\AdminSettingsController::cla
 Route::post('/{user_id}/deny', [App\Http\Controllers\AdminSettingsController::class, 'revoke_access'])->name('revoke_access');
 Route::post('/{user_id}/enact', [App\Http\Controllers\AdminSettingsController::class, 'enact_access'])->name('enact_access');
 
-Route::get('manage_ticket', [App\Http\Controllers\TicketsController::class, 'tickets_manager'])->name('ManageTickets');
+Route::post('/add_replies/{uuid}', [App\Http\Controllers\TicketRepliesController::class, 'create'])->name('reply_ticket');
 
 Route::get('/admin_dash', function () {
     $active_list = DB::table('tickets')->get();
