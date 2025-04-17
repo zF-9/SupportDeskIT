@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
 		<div class="four columns admin-menu">
-		    @include('layouts.admin_sidemenu')
+		    @include('layouts.sidemenu_admin')
 		</div>
 
             <div class="columns eight user_management">

@@ -21,7 +21,7 @@
             </li>
     </div>
 		</ul>
-	    <a href="./settings" class="button">Edit Account</a>
+	    <a href="/{{ Auth::user()->id }}/edit_user" class="button">Edit Account</a>
         <!-- php if($users->getuserinfo('user_group') == 1){ echo '<a href="./admin" class="button button-primary">Admin Panel</a>'; }; -->
 		@if($access == true)
 			<!--<p>yooooooooooo soldja boi</p>-->
@@ -54,7 +54,11 @@
     <div class="six columns">
 		<div class="section" id="current">
 			<div class="entypo-list"></div>
-		    <b>Current Tickets</b>
+			@if($access == true)
+		    	<b>Current Tickets</b>
+			@Else 
+				<b>Tickets</b>
+			@endif
 		    <p>View and manage any tickets that may have responses from our team.</p>
 	    </div>
 	</div>
@@ -100,17 +104,29 @@
 		</tr>
 	</thead>
 	<tbody>
-	@foreach($ticket as $key => $ticks)
-		<tr>
-			<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
-			<td>
-				<span class="entypo-comment"></span>
-			</td>
-			<td>{{$ticks->name}}</td>
-			<td>{{$ticks->created_at}}</td>
-		</tr>
+	@if( $access == 1 )
+		@foreach($ticket as $key => $ticks) 
+			<tr>
+				<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
+				<td>
+					<span class="entypo-comment"></span>
+				</td>
+				<td>{{$ticks->name}}</td>
+				<td>{{$ticks->created_at}}</td>
+			</tr>
 		@endforeach
-		<!--<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>-->  
+	@else 
+	@foreach($own_ticket as $key => $ticks) 
+			<tr>
+				<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
+				<td>
+					<span class="entypo-comment"></span>
+				</td>
+				<td>{{$ticks->name}}</td>
+				<td>{{$ticks->created_at}}</td>
+			</tr>
+		@endforeach
+	@endif
 	</tbody>
 	</table>
 </div>

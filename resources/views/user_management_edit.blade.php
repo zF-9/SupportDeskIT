@@ -4,7 +4,11 @@
     <div class="container">
         <div class="row">
 		<div class="four columns admin-menu">
-		    @include('layouts.admin_sidemenu')
+        @if( $access == true )
+		    @include('layouts.sidemenu_admin')
+        @else 
+            @include('layouts.sidemenu_user')
+        @endif
 		</div>
 
             <div class="columns eight admin-edit-user">
@@ -100,6 +104,7 @@
                     </div>
                 </div>
 
+            @if ( $access == true )
                 <div class="row">
                     <div class="columns four">
                         Actions
@@ -109,15 +114,21 @@
                         @if( $user_scope->user_group == 1 )
                             <button class="button u-full-width" disabled>User is admin</button>
                         @else
+                        <form method="POST" id="access_enact" action="/{{ $user_scope->id }}/enact">
+                        @csrf
                             <button class="button u-full-width" id="make_admin">Make Admin</button>
+                        </form>
                         @endif
                     </div>
-
                     <div class="columns four">
-                            <!--<button class="button u-full-width" id="change_access">Access denied</button>-->
-                            <button class="button u-full-width" id="change_access">Don't Allow Access</button>
+                    <form method="POST" id="access_denied" action="/{{ $user_scope->id }}/deny">
+                    @csrf
+                        <!--<button class="button u-full-width" id="change_access">Access denied</button>-->
+                        <button class="button u-full-width" id="change_access">Don't Allow Access</button>
+                    </form>
                     </div>
                 </div>
+            @endif
             </div>
         </div>
     </div>

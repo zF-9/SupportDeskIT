@@ -11,9 +11,9 @@
 			</div>
 		</div>
 		</li>
-		<a href="/home" >
+		<a href="/overview" >
 		<li>
-			Admin Dashboard
+			Dashboard
 			<p>Overview of site statistics</p>
 		</li></a>
 		<a href="/manage_ticket">
@@ -21,15 +21,15 @@
 			Tickets Management
 			<p>View, answer and resolve tickets created.</p>
 		</li></a>
-		<a href="/user_management">
+		<!--<a href="/user_management">
 		<li>
 			User Management
 			<p>Monitor and modify user accounts</p>
-		</li></a>
-		<a href="/manage_site">
+		</li></a>-->
+		<!--<a href="/manage_site">
 		<li>
 			Site Management
 			<p>Modify sites default settings</p>
-		</li></a>
+		</li></a>-->
 </ul>
 

@@ -68,8 +68,9 @@ class TicketsController extends Controller
         $resolved_ticket = DB::table('tickets')->where('resolved','=', 1)->get();
 
         //dd($tz);
+        $userAccess = Auth::user()->user_group; #check user access
 
-        return view('admin_panel')->with(['active'=>$active_list, 'users'=>$active_users, 'isAdmin'=>$admin_user, 'dept'=>$active_dept, 'open'=>$open_ticket, 'unanswer'=>$unanswer_ticket, 'resolved'=>$resolved_ticket, 'datetime'=>$dt]); 
+        return view('admin_panel')->with(['access'=>$userAccess, 'active'=>$active_list, 'users'=>$active_users, 'isAdmin'=>$admin_user, 'dept'=>$active_dept, 'open'=>$open_ticket, 'unanswer'=>$unanswer_ticket, 'resolved'=>$resolved_ticket, 'datetime'=>$dt]); 
     }
 
     /**
@@ -88,12 +89,22 @@ class TicketsController extends Controller
         //
     }
 
-    public function ticket_view($ticket_uuid) {
-        #$current_viewer = Auth::user()->id; 
-        $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
-        //dd($ticket_log);
+    public function tickets_manager() {
+        $userId = Auth::user()->id;
+        $userAccess = Auth::user()->user_group; #check user access
+        $tickets_view = DB::table('Tickets')->join('users', 'users.id', 'tickets.user_id')->get();
+        $user_tickets = $tickets_view->where('user_id', $userId );
 
-        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log]);
+        return view('ticket_manager')->with(['ticket'=>$tickets_view, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess]);
+    }
+
+    public function ticket_view($ticket_uuid) {
+        $current_viewer = Auth::user()->id; 
+        $userAccess = Auth::user()->user_group; #check user access
+        $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
+        #dd($ticket_log);
+
+        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess ]);
     }
 
     /**

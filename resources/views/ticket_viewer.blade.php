@@ -3,7 +3,7 @@
 @section('content')	
 <div class="container">
 	<div class="row">
-		<a href="#" class="go-back"><span class="entypo-left-open"></span>Dashboard</a>
+		<a href="/overview" class="go-back"><span class="entypo-left-open"></span>Dashboard</a>
 		<br><br>
 		
 		<div class="ticket-insert">

@@ -26,17 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $userId = Auth::user()->id;
 
-        #$active_user = DB::table('users')->get();
-        #dd($active_user);
-        #return view('home', compact('active_user'));
-        $userId = Auth::user()->name;
-        $userAccess = Auth::user()->user_group;
-        //dd($userAccess);
+        $userAccess = Auth::user()->user_group; #check user access
 
         $tickets = DB::table('tickets')->join('users', 'users.id', 'tickets.user_id')->get();
+        $user_tickets = $tickets->where('user_id', $userId );
         $department = DB::table('departments')->get();
-        //dd($tickets);
-        return view('admindash', ['ticket'=>$tickets, 'id'=>$userId, 'access'=>$userAccess, 'departments'=>$department] );
+
+        return view('admindash', ['ticket'=>$tickets, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess, 'departments'=>$department] );
     }
 }

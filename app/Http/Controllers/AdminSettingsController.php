@@ -61,7 +61,7 @@ class AdminSettingsController extends Controller
     {
         $userId = Auth::user()->id;
         $target_user = user::where('id', $user_id)->first();
-        #$session_t = DB::table('sessions')->where('user_id', $userId)->get();
+        $userAccess = Auth::user()->user_group; #check user access
         $user_activity = DB::table('tickets')->join('users', 'users.id', 'tickets.user_id')->where('user_id', $user_id)->get();
 
         $session_t = DB::table('sessions')->where('user_id', $userId)->selectRaw('*, FROM_UNIXTIME(last_activity) as last_activity_datetime')->get();
@@ -69,11 +69,27 @@ class AdminSettingsController extends Controller
         $resolved_ticket = $user_activity->where('resolved', 1)->count();
         $login_time = $session_t->pluck('last_activity_datetime');
         $ip_session = $session_t->pluck('ip_address');
-        
-        #dd($ip_session);
 
         return view('user_management_edit')
-        ->with(['user_scope'=>$target_user, 'activity'=>$user_activity, 'session'=>$session_t, 'login_t'=>$login_time, 'unread'=>$unanswer_ticket, 'res'=>$resolved_ticket, 'login_s'=>$ip_session]);
+        ->with(['user_scope'=>$target_user, 'access'=>$userAccess, 'activity'=>$user_activity, 'session'=>$session_t, 'login_t'=>$login_time, 'unread'=>$unanswer_ticket, 'res'=>$resolved_ticket, 'login_s'=>$ip_session]);
+    }
+
+    public function revoke_access($revoke_user) {
+        $denied = user::where('id', $revoke_user)->first();
+
+        $denied->user_group = 0;
+        $denied->save();
+
+        return redirect()->route('overview');
+    }
+
+    public function enact_access($enact_user) {
+        $enact = user::where('id', $enact_user)->first();
+
+        $enact->user_group = 1;
+        $enact->save();
+
+        return redirect()->route('overview');
     }
 
     /**

@@ -3,7 +3,11 @@
 @section('content')	
 <div class="container">
 	<div class="columns four admin-menu">
-    @include('layouts.admin_sidemenu')
+	@if( $access == 1 )
+    	@include('layouts.sidemenu_admin')
+	@else 
+		@include('layouts.sidemenu_user')
+	@endif
 	</div>
 	
 	<div class="columns eight admin_dash admin-ticket-chart">	

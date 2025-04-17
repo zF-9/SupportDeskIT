@@ -5,7 +5,11 @@
 <div class="container">
 	<div class="row">
 		<div class="four columns admin-menu">
-		@include('layouts.admin_sidemenu')
+		@if( $access == true )
+			@include('layouts.sidemenu_admin')
+		@else 
+			@include('layouts.sidemenu_user')
+		@endif
 		</div>
 
 
@@ -22,17 +26,31 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach($ticket as $key => $ticks)
-				<tr>
-					<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
-					<td>
-						<span class="entypo-comment"></span>
-					</td>
-					<td>{{$ticks->name}}</td>
-					<td>{{$ticks->created_at}}</td>
-				</tr>
+			@if( $access == true )
+				@foreach($ticket as $key => $ticks)
+					<tr>
+						<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
+						<td>
+							<span class="entypo-comment"></span>
+						</td>
+						<td>{{$ticks->name}}</td>
+						<td>{{$ticks->created_at}}</td>
+					</tr>
 				@endforeach
-				<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>  </tbody>
+			@else 
+				@foreach($own_ticket as $key => $ticks)
+					<tr>
+						<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
+						<td>
+							<span class="entypo-comment"></span>
+						</td>
+						<td>{{$ticks->name}}</td>
+						<td>{{$ticks->created_at}}</td>
+					</tr>
+				@endforeach	
+			@endif			
+				<!--<tr><td><a href="ticket/?id=67d100b4bc6f7">take a look at this bug!</a></td><td><span class="entypo-comment"></span></td><td>Me</td><td>2 weeks ago</td></tr>--> 
+			</tbody>
 			</table>
 		</div>
 </div>
