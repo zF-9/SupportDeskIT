@@ -23,7 +23,8 @@
             <tr>
                 <td id="logo">SupportDeskIT</td>
                 <td id="navigation">
-                    <a href="{{ route('register') }}">Sign in</a>
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
                     <a href="#bio">about</a>
                     <a href="#contact">contact</a>
                 </td>

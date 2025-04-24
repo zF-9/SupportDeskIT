@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('department_id');
-            $table->uuid('uniqid');
+            $table->text('uniqid');
             $table->string('title');
             $table->text('init_msg');
             $table->boolean('last_reply')->default(0);

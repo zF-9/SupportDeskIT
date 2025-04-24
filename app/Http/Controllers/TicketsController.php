@@ -95,16 +95,17 @@ class TicketsController extends Controller
         $tickets_view = DB::table('Tickets')->join('users', 'users.id', 'tickets.user_id')->get();
         $user_tickets = $tickets_view->where('user_id', $userId );
 
+        $all_replies = DB::table('ticket_replies')->join('tickets', 'tickets.uniqid', 'ticket_replies.ticket_id')->get();
+
+        #dd($all_replies);
+
         return view('ticket_manager')->with(['ticket'=>$tickets_view, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess]);
     }
 
     public function ticket_view(Request $request, $ticket_uuid) {
         $current_viewer = Auth::user()->id; 
         $userAccess = Auth::user()->user_group; #check user access
-        $ticket_log = DB::table('tickets')
-        ->where('uniqid',$ticket_uuid)
-        ->join('users', 'users.id', 'tickets.user_id')
-        ->first();
+        $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
 
         if($userAccess == 1) {
             $target_ticket = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->update(['admin_read'=>1]);
@@ -112,10 +113,14 @@ class TicketsController extends Controller
         else {
             
         }
+        
         $uuid = $ticket_log->uniqid;
 
         $replies = DB::table('ticket_replies')->where('ticket_id',$uuid)->join('users', 'users.id', 'ticket_replies.user')->get();
-        #dd($replies);
+        $last_reply = $replies->sortByDesc('updated_at')->first();
+
+        #dd($uuid);
+
         return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess, 'ticket_id'=>$uuid, 'respond'=>$replies]);
     }
 

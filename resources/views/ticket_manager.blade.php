@@ -21,7 +21,7 @@
 				<tr>
 				<th>Subject</th>
 				<th>Status</th>
-				<th>Last Reply</th>
+				<th>Request By</th>
 				<th>Recent</th>
 				</tr>
 			</thead>
@@ -31,7 +31,8 @@
 					<tr>
 						<td><a href="/{{ $ticks->uniqid }}/view_ticket">{{$ticks->title}}</a></td>
 						<td>
-							<span class="entypo-comment"></span>
+							<!--<span class="entypo-comment"></span>-->
+							<span class="entypo-chat" style="color:#2895F1"></span>
 						</td>
 						<td>{{$ticks->name}}</td>
 						<td>{{$ticks->created_at}}</td>

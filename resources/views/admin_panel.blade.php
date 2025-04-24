@@ -14,7 +14,7 @@
 		
 		<div class="row" id="update">
 			<div class="columns four">
-				<a href="ticket_management.php">
+				<a href="/manage_ticket">
 					<div class="stat">
 						<h3>{{ $active->count() }}</h3>
 						<h5>Tickets</h5>
@@ -23,7 +23,7 @@
 			</div>
 			
 			<div class="columns four">
-				<a href="user_management.php">
+				<a href="/user_management">
 					<div class="stat">
 						<h3>{{ $users->count() }}</h3>
 						<h5>Users</h5>
@@ -32,7 +32,7 @@
 			</div>
 		
 			<div class="columns four">
-				<a href="site_management.php">
+				<a href="/manage_site">
 					<div class="stat">
 						<h3>{{ $dept->count() }}</h3>
 						<h5>Departments</h5>

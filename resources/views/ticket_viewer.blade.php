@@ -11,13 +11,12 @@
 				<div class="profile">				
 					<ul>
 						<li><b>{{ $ticketlog->name }}</b></li>
-                        
                         @if($ticketlog->user_group == 1)
                             <li>Administrator</li>
                         @else
                             <li> General User</li>
                         @endif
-						<li><a href="#">Edit Account</a></li>
+						<!--<li><a href="#">Edit Account</a></li>-->
 					</ul>
 				</div>
 			</div>
@@ -27,10 +26,10 @@
 				<hr>
 				{{$ticketlog->init_msg}} 
 				<ul>
-					<li>Posted {{$ticketlog->created_at}}</li>
-                    @if( $ticketlog->resolved  == 0)
+					<li>Posted {{$ticketlog->updated_at}}</li>
+                    @if( $ticketlog->user_id  ==  Auth::user()->id)
                         <li><a id="no_longer_help" href="#"><span class="entypo-check"></span>I no longer need help</a></li>
-                    @elseif( $ticketlog->user_id  ==  Auth::user()->id )
+                    @elseif( $ticketlog->resolved == 1 )
                         <li>This ticket has been marked resolved.</li>
                     @elseif( $ticketlog->user_group == 1 && $ticketlog->resolved == 1 )
                         <li>Ticket Closed</li>
@@ -48,9 +47,8 @@
 			<div class="columns three">
 				<div class="profile">				
 					<ul>
-						<li><b>{{ $reply->name }}</b></li>
-                        
-                        @if($ticketlog->user_group == 1)
+						<li><b>{{ $reply->name }}</b></li> 
+                        @if($reply->user_group == 1)
                             <li>Administrator</li>
                         @else
                             <li> General User</li>
@@ -62,7 +60,7 @@
 			<div class="columns nine">
 				{{$reply->text}} 
 				<ul>
-					<li>Posted {{$reply->created_at}}</li>
+					<li>Posted {{$reply->updated_at}}</li>
 				</ul>
 			</div>
 		</div>
@@ -83,12 +81,12 @@
 				<div class="profile">				
 					<ul>
 						<li><b>{{Auth::user()->name}}</li>
-                        @if( $ticketlog->user_group == 1)
+                        @if( Auth::user()->user_group == 1)
                             <li>Administrator</li>
                         @else
                             <li>General User</li>
                         @endif
-						<li><a href="#">Edit Account</a></li>
+						<!--<li><a href="#">Edit Account</a></li>-->
 					</ul>
 				</div>
 			</div>

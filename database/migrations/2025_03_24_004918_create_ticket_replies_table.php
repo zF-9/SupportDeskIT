@@ -20,6 +20,10 @@ return new class extends Migration
             $table->timestamp('updated_at');
             $table->timestamp('deleted_at')->nullable();
         });
+
+        /*Schema::table('ticket_replies', function(Blueprint $table) {
+            $table->foreign('ticket_id')->references('id')->on('tickets');  
+        });*/ 
     }
 
     /**

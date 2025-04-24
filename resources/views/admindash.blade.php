@@ -99,7 +99,7 @@
 		<tr>
 		<th>Subject</th>
 		<th>Status</th>
-		<th>Last Reply</th>
+		<th>Request By</th>
 		<th>Recent</th>
 		</tr>
 	</thead>

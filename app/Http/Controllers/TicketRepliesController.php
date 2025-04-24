@@ -25,11 +25,12 @@ class TicketRepliesController extends Controller
     public function create($uuid)
     {
         //
+        #dd($uuid);
         $dt = new Carbon();
         $userId = Auth::user()->id;
 
         $reply_ticket = new ticket_replies;
-        #dd($uuid);
+        
         $reply_ticket->user = $userId;
         $reply_ticket->text = request('ticket_reply');
         $reply_ticket->ticket_id = $uuid;
@@ -37,6 +38,10 @@ class TicketRepliesController extends Controller
         $reply_ticket->save();
 
        return redirect()->back(); 
+    }
+
+    public function last_reply() {
+        
     }
 
     /**
