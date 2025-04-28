@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\tickets;
 use Illuminate\Http\Request;
+use App\Models\short_messages;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,5 +44,19 @@ class HomeController extends Controller
         #dd($test);
 
         return view('admindash', ['ticket'=>$tickets, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess, 'departments'=>$department, 'last_reply'=>$replies] );
+    }
+
+    public function short_message() {
+        $dt = new Carbon();
+
+        $new_message = new short_messages;
+
+        $new_message->name = request('name');
+        $new_message->email = request('email');
+        $new_message->message = request('message');
+
+        $new_message->save();
+
+        return redirect()->route('landingpage');
     }
 }

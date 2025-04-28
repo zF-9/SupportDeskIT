@@ -10,6 +10,7 @@
   <link href='//weloveiconfonts.com/api/?family=entypo' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/fancybox-2.1.5-min.css">
   <link rel="icon" type="image/png" href="">
   <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../js/index.js"></script>

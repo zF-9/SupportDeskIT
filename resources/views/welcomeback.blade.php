@@ -23,8 +23,12 @@
             <tr>
                 <td id="logo">SupportDeskIT</td>
                 <td id="navigation">
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Register</a>
+                    @if(isset(Auth::user()->name))
+                        <a href="/home">{{ Auth::user()->name }}</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('register') }}">Register</a>
+                    @endif
                     <a href="#bio">about</a>
                     <a href="#contact">contact</a>
                 </td>
@@ -35,7 +39,7 @@
         <tr>
             <td id="about" class="animated slideInLeft" style="animation-delay:2s;">
                 <h1>Ticketing software for effortless customer support.</h1>
-                <button class="btn_one" onClick = "window.location.href ='{{ route('login') }}';">Take Me</button><br>
+                <a class="btn_one" href = "{{ route('home') }}">Take Me</a><br>
                 <table>
                     <tr>
                         <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social"><i class="fab fa-facebook"></i></a></td>
@@ -50,7 +54,7 @@
         </tr>
     </table>
     
-    <div id="bio">
+    <!--<div id="bio">
         <h1>about</h1>
         <p>
             Helpdesk is a simple ticket system that allows customers to create new tickets that can be answered by certain members. Helpdesk has been developed using PHP not frameworks, thats why its not confusing and really easy to use.
@@ -72,7 +76,7 @@
             <li> Config File</li>
             <li> and Many more...</li>
         </p>
-    </div>
+    </div>-->
     <div id="contact">
         <h1>contact</h1>
             <table>
@@ -81,20 +85,22 @@
                         <div id="inner_div">
                             <table id="inner_table">
                                 <tr>
-                                    <td><i class="fas fa-phone"></i> &nbsp; +918293111380</td>
+                                    <td><i class="fas fa-phone"></i> &nbsp; 088 368600 / 368601</td>
                                 </tr>
                                 <tr>
-                                    <td><i class="fas fa-at"></i> &nbsp; yourname@email.com</td>
+                                    <td><i class="fas fa-at"></i> &nbsp; digitalgovernment.sabah@gmail.com</td>
                                 </tr>
-                                 <tr>
+                                <!--<tr>
                                     <td><i class="fas fa-fax"></i> &nbsp; +918293111380</td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <td><i class="fas fa-map-marker-alt"></i>
                                     <div id="address">
-                                        Street 123,<br>
-                                        blah blah city,<br>
-                                        blah blah country
+                                        BAHAGIAN KERAJAAN DIGITAL<br>
+                                        Jabatan Perkhidmatan Awam Negeri Sabah<br>
+                                        Tingkat 13, Blok A, Menara Kinabalu,<br>
+                                        Jalan Sulaman, Teluk Likas, 88400<br>
+                                        Kota Kinabalu, Sabah.
                                     </div>
                                     </td>
                                 </tr>
@@ -111,10 +117,11 @@
                         </div>
                     </td>
                     <td>
-                        <form action="mailto.php" method="POST">
+                        <form action="{{ route('short_message') }}" method="POST">
+                        {!! csrf_field() !!}
                             <input type="text" name="name" placeholder="name" required>
                             <input type="email" name="email" placeholder="email" required><br>
-                            <textarea name="msg" placeholder="your message" required rows="5"></textarea><br>
+                            <textarea name="message" placeholder="your message" required rows="5"></textarea><br>
                             <button class="btn_one">send</button>
                         </form> 
                     </td>

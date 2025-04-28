@@ -1,7 +1,10 @@
 <?php
- 
+
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\tickets;
+use Illuminate\Http\Request;
+use App\Models\short_messages;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -13,9 +16,24 @@ Route::get('/', function () {
     return view('auth.signin');
 });*/
 
+Route::post('/send_message', function() {
+    $dt = new Carbon();
+
+    $new_message = new short_messages;
+
+    $new_message->name = request('name');
+    $new_message->email = request('email');
+    $new_message->message = request('message');
+
+    $new_message->save();
+
+    return redirect()->route('landingpage');
+})->name('short_message');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::post('/ticketopen', [App\Http\Controllers\TicketsController::class, 'create'])->name('OpenTicket');
 
@@ -36,6 +54,11 @@ Route::post('/{user_id}/deny', [App\Http\Controllers\AdminSettingsController::cl
 Route::post('/{user_id}/enact', [App\Http\Controllers\AdminSettingsController::class, 'enact_access'])->name('enact_access');
 
 Route::post('/add_replies/{uuid}', [App\Http\Controllers\TicketRepliesController::class, 'create'])->name('reply_ticket');
+
+
+Route::get('image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'index']);
+Route::post('image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'upload']);
+Route::delete('image-gallery/{id}', [App\Http\Controllers\TicketGalleryController::class, 'destroy']);
 
 Route::get('/admin_dash', function () {
     $active_list = DB::table('tickets')->get();
