@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<img src="[https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif](https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT.gif)"/>
+<img src="https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif"/>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -22,5 +22,5 @@ SupportDeskIT is a web application built using Laravel v11.x, to create a seamle
 
 ## Landing Page
 
-<img src="[https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif](https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif)"/>
+<img src="https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif"/>
 
