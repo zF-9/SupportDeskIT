@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use Carbon\Carbon;
-use App\Models\ticket_replies;
+use App\Models\tickets;
 use Illuminate\Http\Request;
+use App\Models\ticket_replies;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -40,8 +41,17 @@ class TicketRepliesController extends Controller
        return redirect()->back(); 
     }
 
-    public function last_reply() {
-        
+    public function close_ticket($uuid) {
+        $userAccess = Auth::user()->user_group; #check user access
+        $target_ticket = tickets::where('uniqid', $uuid)->get();
+
+        if($userAccess == 1) {
+            $ex_ticket = $target_ticket->join('users', 'users.id', 'tickets.user_id')->update(['resolved'=>1]);
+        }
+
+        #dd($ex_ticket);
+
+        return redirect()->back(); 
     }
 
     /**

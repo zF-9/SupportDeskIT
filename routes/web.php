@@ -47,6 +47,7 @@ Route::post('/{user_id}/deny', [App\Http\Controllers\AdminSettingsController::cl
 Route::post('/{user_id}/enact', [App\Http\Controllers\AdminSettingsController::class, 'enact_access'])->name('enact_access');
 
 Route::post('/add_replies/{uuid}', [App\Http\Controllers\TicketRepliesController::class, 'create'])->name('reply_ticket');
+Route::post('/ticket_resolve/{uuid}', [App\Http\Controllers\TicketRepliesController::class, 'close_ticket'])->name('close_ticket');
 
 
 Route::get('image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'index']);

@@ -9,7 +9,7 @@
 <div class="container">
 	<div class="row">
 		<div class="six offset-by-three columns auth-section">
-			<h4>Sign in or Register</h4>
+			<h4>Register</h4>
 			<p>Using the form below please enter your email address and password and we'll get started.</p>
 
 			<form id="auth" method="POST" action="{{ route('register') }}">

@@ -28,11 +28,15 @@
 				<ul>
 					<li>Posted {{$ticketlog->updated_at}}</li>
                     @if( $ticketlog->user_id  ==  Auth::user()->id || Auth::user()->user_group == 1)
+					<!-- add statement to check when the ticket is close or nah; (1): check if it's admin/OP; (2):check if it's closed -->
                         <li>
-							<a id="no_longer_help" href="#">
+							<form action="/ticket_resolve/{{ $ticket_id }}" method="POST">
+							{!! csrf_field() !!}
+							<button id="no_longer_helpzzx" class="button" type="submit">
 							<span class="entypo-check"></span>
 								Mark as resolved
-							</a>
+							</button>
+							</form>
 						</li>
                     @elseif( $ticketlog->resolved == 1 )
                         <li>This ticket has been marked resolved.</li>

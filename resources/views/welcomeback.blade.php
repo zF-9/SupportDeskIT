@@ -38,15 +38,15 @@
     <table id="top_part">
         <tr>
             <td id="about" class="animated slideInLeft" style="animation-delay:2s;">
-                <h1>Ticketing software for effortless customer support.</h1>
-                <a class="btn_one" href = "{{ route('home') }}">Take Me</a><br>
+                <h1>Where Effortless Hardware & Software Ticketing Support Start With.</h1>
+                <a class="btn_one" href = "{{ route('home') }}">Take Me</a>
                 <table>
                     <tr>
                         <td class="animated zoomIn" style="animation-delay:2.2s;"><a class="social"><i class="fab fa-facebook"></i></a></td>
-                        <td class="animated zoomIn" style="animation-delay:2.4s;"><a class="social"><i class="fab fa-twitter"></i></a></td>
-                        <td class="animated zoomIn" style="animation-delay:2.6s;"><a class="social"><i class="fab fa-instagram"></i></a></td>
-                        <td class="animated zoomIn" style="animation-delay:2.8s;"><a class="social"><i class="fab fa-dribbble"></i></a></td>
-                        <td class="animated zoomIn" style="animation-delay:3.0s;"><a class="social"><i class="fab fa-medium"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:2.4s;"><a class="social"><i class="fab fa-youtube-square"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:2.6s;"><a class="social"><i class="fab fa-git-square"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:2.8s;"><a class="social"><i class="fas fa-at"></i></a></td>
+                        <td class="animated zoomIn" style="animation-delay:3.0s;"><a class="social"><i class="fa fa-microchip"></i></a></td>
                     </tr>
                 </table>
             </td>
@@ -54,29 +54,23 @@
         </tr>
     </table>
     
-    <!--<div id="bio">
+    <!-- About Me -->
+    <div id="bio">
         <h1>about</h1>
         <p>
-            Helpdesk is a simple ticket system that allows customers to create new tickets that can be answered by certain members. Helpdesk has been developed using PHP not frameworks, thats why its not confusing and really easy to use.
+            SupportDeskIT is a simple ticket system that allows staff to create new tickets and monitor delivery progress. Developed using web framework, SupportDeskIT is open source and really easy to use.
         </p>
         <p>FEATURES: 
         <ul>
             <li> Simple clean Design </li>
-            <li> Built with PHP and OOP, MySQL</li>
-            <li> AJAX Forms</li>
-            <li> PHPMailer</li>
-            <li> Easy to Integrate</li>
-            <li> Config to get you started</li>
-            <li> Admin Panel</li>
-            <li> User Management</li>
-            <li> Site Management</li>
-            <li> Departments Management</li>
-            <li> Gravatar Images</li>
-            <li> Mobile Friendly</li>
-            <li> Config File</li>
-            <li> and Many more...</li>
+            <li> Open source code </li>
+            <li> On prem messaging </li>
+            <li> Department & User management </li>
+            <li> User friendly ticketing with picture logs</li>
         </p>
-    </div>-->
+    </div>
+
+    <!-- Contact Us -->
     <div id="contact">
         <h1>contact</h1>
             <table>
@@ -107,10 +101,10 @@
                                 <tr>
                                     <td>
                                         <a class="social"><i class="fab fa-facebook"></i></a>
-                                        <a class="social"><i class="fab fa-twitter"></i></a>
-                                        <a class="social"><i class="fab fa-instagram"></i></a>
-                                        <a class="social"><i class="fab fa-dribbble"></i></a>
-                                        <a class="social"><i class="fab fa-medium"></i></a>
+                                        <a class="social"><i class="fab fa-youtube-square"></i></a>
+                                        <a class="social"><i class="fab fa-git-square"></i></a>
+                                        <a class="social"><i class="fas fa-at"></i></a>
+                                        <a class="social"><i class="fa fa-microchip"></i></a>
                                     </td>
                                 </tr>
                             </table>
