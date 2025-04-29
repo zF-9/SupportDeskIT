@@ -2,7 +2,7 @@
 	<li class="profile">
 		<div class="row">
 			<div class="three columns">
-
+				<img style="margin-left:10px" src="../css/images/avatar2.png">
 			</div>
 			<div class="nine columns">
 				<b>{{ Auth::user()->name }}</b><br>

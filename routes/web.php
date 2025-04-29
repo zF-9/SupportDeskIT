@@ -12,21 +12,14 @@ Route::get('/', function () {
     return view('welcomeback');
 })->name('landingpage');
 
-/*Route::get('/loginer', function () {
-    return view('auth.signin');
-});*/
-
 Route::post('/send_message', function() {
     $dt = new Carbon();
-
     $new_message = new short_messages;
-
     $new_message->name = request('name');
     $new_message->email = request('email');
     $new_message->message = request('message');
 
     $new_message->save();
-
     return redirect()->route('landingpage');
 })->name('short_message');
 
@@ -57,7 +50,7 @@ Route::post('/add_replies/{uuid}', [App\Http\Controllers\TicketRepliesController
 
 
 Route::get('image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'index']);
-Route::post('image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'upload']);
+Route::post('/{uid}/image-gallery', [App\Http\Controllers\TicketGalleryController::class, 'upload']);
 Route::delete('image-gallery/{id}', [App\Http\Controllers\TicketGalleryController::class, 'destroy']);
 
 Route::get('/admin_dash', function () {

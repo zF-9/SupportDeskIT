@@ -14,18 +14,23 @@ class TicketGalleryController extends Controller
 
     public function upload(Request $request)
     {
+        #dd($ticket_id);
     	$this->validate($request, [
     		'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'ticket_uid' => 'required',
         ]);
 
         $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $input['image']);
 
+        $input['ticket_uid'] = $request->ticket_uid;
         $input['title'] = $request->title;
+        #dd($input);
         TicketGallery::create($input);
 
     	return back()->with('success','Image Uploaded successfully.');
+        #fix here uuid not recorded in the ticket gallery fixtures
     } 
 
     public function destroy($id)

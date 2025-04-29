@@ -27,8 +27,13 @@
 				{{$ticketlog->init_msg}} 
 				<ul>
 					<li>Posted {{$ticketlog->updated_at}}</li>
-                    @if( $ticketlog->user_id  ==  Auth::user()->id)
-                        <li><a id="no_longer_help" href="#"><span class="entypo-check"></span>I no longer need help</a></li>
+                    @if( $ticketlog->user_id  ==  Auth::user()->id || Auth::user()->user_group == 1)
+                        <li>
+							<a id="no_longer_help" href="#">
+							<span class="entypo-check"></span>
+								Mark as resolved
+							</a>
+						</li>
                     @elseif( $ticketlog->resolved == 1 )
                         <li>This ticket has been marked resolved.</li>
                     @elseif( $ticketlog->user_group == 1 && $ticketlog->resolved == 1 )
@@ -60,7 +65,7 @@
 			<div class="columns nine">
 				{{$reply->text}} 
 				<ul>
-					<li>Posted {{$reply->updated_at}}</li>
+					<li>Posted {{$reply->created_at}}</li>
 				</ul>
 			</div>
 		</div>
@@ -69,6 +74,40 @@
     @endforeach
 	<!-- ticket post end -->	
 
+	<div class="columns twelve ticket-insert nine">
+	<h5>Photo Log</h5>
+
+		<div class='list-group gallery nine'>
+		@if(  $galleries->count() === 0 )
+		<ul style="margin-bottom: 21px">
+		<li>No recent upload</li></ul>
+		@else 
+		<ul style="margin-bottom: 21px">
+		<li>Recent upload on {{ $galleries->last()->updated_at }}</li></ul>
+		@endif
+			@if($galleries->count())
+				@foreach($galleries as $image)
+				<div style="margin: 0 auto" class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+					<a class="thumbnail fancybox" rel="ligthbox" href="/images/{{ $image->image }}">
+						<img style="display:block; height: 150px" class="img-responsive" alt="" src="/images/{{ $image->image }}" />
+							<div class='text-center'>
+								<small class='text-muted'>{{ $image->title }}</small>
+							</div> <!-- text-center / end -->
+					</a>
+					<form action="{{ url('/image-gallery',$image->id) }}" method="POST">
+						<input type="hidden" name="_method" value="delete">
+						{!! csrf_field() !!}
+						<button type="submit" class="close-icon btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+					</form>
+				</div> <!-- col-6 / end -->
+				@endforeach
+			@endif
+
+		</div> <!-- list-group / end -->
+
+	</div> <!-- row / end -->	
+	<hr style="border-top: 3px solid">
+	
 
 	<div id="update">
 	<!-- reply start -->
@@ -99,7 +138,7 @@
                 </form>
             
 				<div class="row">
-					<form action="{{ url('image-gallery') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
+					<form action="/{{ $ticket_id }}/image-gallery" class="form-image-upload" method="POST" enctype="multipart/form-data">
 					{!! csrf_field() !!}
 
 							@if (count($errors) > 0)
@@ -122,13 +161,14 @@
 
 							<div class="row">
 								<div class="col-md-5">
-									<strong>Title:</strong>
+									<strong>Image Title:</strong>
 									<input type="text" name="title" class="form-control" placeholder="Title">
 								</div>
 
 								<div class="col-md-5">
-									<strong>Image:</strong>
+									<strong>File:</strong>
 									<input type="file" name="image" class="form-control">
+									<input class="hidden" value="{{ $ticket_id }}" type="text" name="ticket_uid" class="form-control">
 								</div>
 
 								<div class="col-md-2">
@@ -160,27 +200,6 @@
 </div>
 <hr>
 
-	<div class="row">
-        <div class='list-group gallery'>
-                @if($images->count())
-                    @foreach($images as $image)
-                    <div style="margin: 0 auto" class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                        <a class="thumbnail fancybox" rel="ligthbox" href="/images/{{ $image->image }}">
-                            <img style="display:block; max-height: 200px; max-width: 450px" class="img-responsive" alt="" src="/images/{{ $image->image }}" />
-                            <div class='text-center'>
-                                <small class='text-muted'>{{ $image->title }}</small>
-                            </div> <!-- text-center / end -->
-                        </a>
-                        <form action="{{ url('image-gallery',$image->id) }}" method="POST">
-                            <input type="hidden" name="_method" value="delete">
-                            {!! csrf_field() !!}
-                            <button type="submit" class="close-icon btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
-                        </form>
-                    </div> <!-- col-6 / end -->
-                    @endforeach
-                @endif
-        </div> <!-- list-group / end -->
-    </div> <!-- row / end -->	
 
 
 </div>

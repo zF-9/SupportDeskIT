@@ -98,13 +98,16 @@ class TicketsController extends Controller
 
         $all_replies = DB::table('ticket_replies')->join('tickets', 'tickets.uniqid', 'ticket_replies.ticket_id')->get();
         $images = TicketGallery::get();
-        #dd($images);
+        if( isset($images) ){
+            #$latest_img = $images->first()->updated_at;
+        } 
+        #dd($latest_img);
 
         return view('ticket_manager')->with(['ticket'=>$tickets_view, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess, 'images'=>$images]);
     }
 
     public function ticket_view(Request $request, $ticket_uuid) {
-        $images = TicketGallery::get();
+        
         $current_viewer = Auth::user()->id; 
         $userAccess = Auth::user()->user_group; #check user access
         $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
@@ -117,13 +120,14 @@ class TicketsController extends Controller
         }
         
         $uuid = $ticket_log->uniqid;
+        $galleries = TicketGallery::where('ticket_uid', $uuid)->get();
 
         $replies = DB::table('ticket_replies')->where('ticket_id',$uuid)->join('users', 'users.id', 'ticket_replies.user')->get();
         $last_reply = $replies->sortByDesc('updated_at')->first();
+        #$latest_img = $images->first()->updated_at;
+        #dd($replies);
 
-        #dd($uuid);
-
-        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess, 'ticket_id'=>$uuid, 'respond'=>$replies, 'images'=>$images]);
+        return view('ticket_viewer')->with(['ticketlog'=>$ticket_log, 'access'=>$userAccess, 'ticket_id'=>$uuid, 'respond'=>$replies, 'galleries'=>$galleries]);
     }
 
     /**
