@@ -112,6 +112,8 @@ class TicketsController extends Controller
         $userAccess = Auth::user()->user_group; #check user access
         $ticket_log = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->first();
 
+        #dd($ticket_log);
+
         if($userAccess == 1) {
             $target_ticket = DB::table('tickets')->where('uniqid',$ticket_uuid)->join('users', 'users.id', 'tickets.user_id')->update(['admin_read'=>1]);
         }

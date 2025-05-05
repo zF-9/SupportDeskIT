@@ -44,6 +44,18 @@
                         <li>Ticket Closed</li>
                     @endif
 				</ul>
+				<ul>
+				@if($ticketlog->resolved == 0)
+
+				@else
+				<li>
+					<button id="no_lo" class="button" type="secondary">
+					<span class="entypo-check"></span>
+						Ticket is closed
+					</button>
+				</li>					
+				@endif
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -186,14 +198,14 @@
 
             @else
             <div class="columns nine">
-                @if($ticketlog->user_group == 0)
-                    <div class="alert warning">This ticket has been closed, please open another support ticket for further support.</div>
+                @if(Auth::user()->user_group == 0) 
+                    <div class="alert warning">This ticket has been closed, please open another support ticket for further support.</div> <!-- User -->
                 @else
-                    <div class="alert warning">This ticket has been closed.</div>
+                    <div class="alert warning">This ticket has been closed.</div> <!-- admin -->
                 @endif
                 <form>
-                    <textarea id="rtext" class="u-full-width" disabled placeholder="Enter your reply..."></textarea>
-                    <button disabled>Add Reply</button>
+                    <textarea id="rtext" class="u-full-width" disabled placeholder="You can no longer reply to this ticket"></textarea>
+                    <!--<button disabled>Add Reply</button>-->
                 </form>
             </div>
 
