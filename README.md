@@ -22,5 +22,5 @@ SupportDeskIT is a web application built using Laravel v11.x, to create a seamle
 
 ## Landing Page
 
-<img src="https://github.com/zF-9/SupportDeskIT/blob/main/public/SupportDeskIT_homepage.gif"/>
+<img src="https://github.com/zF-9/SupportDeskIT/blob/main/public/css/images/SDIT.png"/>
 
