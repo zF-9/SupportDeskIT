@@ -26,23 +26,30 @@
 				<hr>
 				{{$ticketlog->init_msg}} 
 				<ul>
-					<li>Posted {{$ticketlog->updated_at}}</li>
-                    @if( $ticketlog->user_id  ==  Auth::user()->id || Auth::user()->user_group == 1)
+				<li>Posted {{$ticketlog->updated_at}}</li>
+				@if($ticketlog->resolved == 1)
+				<li>
+					<button id="no_lon" class="btn-danger" type="">
+					<span class="entypo-eye"> </span>
+						Ticket is closed
+					</button>
+				</li>
+				@else
+					@if( $ticketlog->user_id  ==  Auth::user()->id || Auth::user()->user_group == 1)
 					<!-- add statement to check when the ticket is close or nah; (1): check if it's admin/OP; (2):check if it's closed -->
-                        <li>
-							<form action="/ticket_resolve/{{ $ticket_id }}" method="POST">
-							{!! csrf_field() !!}
-							<button id="no_longer_helpzzx" class="button" type="submit">
-							<span class="entypo-check"></span>
-								Mark as resolved
-							</button>
-							</form>
-						</li>
-                    @elseif( $ticketlog->resolved == 1 )
-                        <li>This ticket has been marked resolved.</li>
-                    @elseif( $ticketlog->user_group == 1 && $ticketlog->resolved == 1 )
-                        <li>Ticket Closed</li>
-                    @endif
+                    <li>
+						<form action="/ticket_resolve/{{ $ticket_id }}" method="POST">
+						{!! csrf_field() !!}
+						<button id="no_longer_helpzzx" class="button" type="submit">
+						<span class="entypo-check"></span>
+							Mark as resolved
+						</button>
+						</form>
+					</li>
+					@else
+					<li>you can not close this ticket</li>
+					@endif
+				@endif
 				</ul>
 				<ul>
 				@if($ticketlog->resolved == 0)
@@ -123,7 +130,6 @@
 
 	</div> <!-- row / end -->	
 	<hr style="border-top: 3px solid">
-	
 
 	<div id="update">
 	<!-- reply start -->

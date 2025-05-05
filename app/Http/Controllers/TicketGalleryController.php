@@ -17,7 +17,7 @@ class TicketGalleryController extends Controller
         #dd($ticket_id);
     	$this->validate($request, [
     		'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4128',
             'ticket_uid' => 'required',
         ]);
 
