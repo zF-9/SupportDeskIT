@@ -55,12 +55,12 @@
 				@if($ticketlog->resolved == 0)
 
 				@else
-				<li>
+				<!--<li>
 					<button id="no_lo" class="button" type="secondary">
 					<span class="entypo-check"></span>
 						Ticket is closed
 					</button>
-				</li>					
+				</li>	-->				
 				@endif
 				</ul>
 			</div>

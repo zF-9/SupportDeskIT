@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $userAccess = Auth::user()->user_group; #check user access
 
-        $tickets = DB::table('tickets')->join('users', 'users.id', 'tickets.user_id')->get();
+        $tickets = DB::table('tickets')->join('users', 'users.id', 'tickets.user_id')->join('departments', 'departments.id', 'tickets.department_id')->get();
         $user_tickets = $tickets->where('user_id', $userId );
         $department = DB::table('departments')->get();
 
@@ -40,8 +40,8 @@ class HomeController extends Controller
         $last_reply = $replies->sortByDesc('updated_at')->first();
 
         #$test = DB::table('tickets')->join('tickets', 'tickets.uniqid', 'ticket_replies.ticket_id')->join('users', 'users.id', 'tickets.user_id')->get();
-
-        #dd($test);
+        #$section = DB::table('departments')->where('tickets', 'department_id', 'departments.id');
+        #dd($tickets);
 
         return view('admindash', ['ticket'=>$tickets, 'own_ticket'=>$user_tickets, 'id'=>$userId, 'access'=>$userAccess, 'departments'=>$department, 'last_reply'=>$replies] );
     }

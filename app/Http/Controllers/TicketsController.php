@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Carbon\Carbon;
 use App\Models\tickets;
+use App\Models\department;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\TicketGallery;
@@ -93,8 +94,11 @@ class TicketsController extends Controller
     public function tickets_manager() {
         $userId = Auth::user()->id;
         $userAccess = Auth::user()->user_group; #check user access
-        $tickets_view = DB::table('Tickets')->join('users', 'users.id', 'tickets.user_id')->get();
+        $tickets_view = DB::table('Tickets')->join('users', 'users.id', 'tickets.user_id')->join('departments', 'departments.id', 'tickets.department_id')->select('departments.name as DeptName', 'users.name as nameUser', 'tickets.*')->get();
         $user_tickets = $tickets_view->where('user_id', $userId );
+
+        #$dept_name = DB::table('departments')->join($tickets_view,  'tickets.department_id', 'departments.id')->get();
+        #dd($tickets_view);
 
         $all_replies = DB::table('ticket_replies')->join('tickets', 'tickets.uniqid', 'ticket_replies.ticket_id')->get();
         $images = TicketGallery::get();

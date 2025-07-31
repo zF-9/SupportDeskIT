@@ -34,7 +34,7 @@
 							<!--<span class="entypo-comment"></span>-->
 							<span class="entypo-chat" style="color:#2895F1"></span>
 						</td>
-						<td>{{$ticks->name}}</td>
+						<td>{{$ticks->DeptName}}</td>
 						<td>{{$ticks->created_at}}</td>
 					</tr>
 				@endforeach
@@ -45,7 +45,7 @@
 						<td>
 							<span class="entypo-comment"></span>
 						</td>
-						<td>{{$ticks->name}}</td>
+						<td>{{$ticks->deptName}}</td>
 						<td>{{$ticks->created_at}}</td>
 					</tr>
 				@endforeach	
